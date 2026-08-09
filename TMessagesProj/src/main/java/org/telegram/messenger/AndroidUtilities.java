@@ -1732,6 +1732,19 @@ public class AndroidUtilities {
 
     public static Typeface getTypeface(String assetPath) {
         synchronized (typefaceCache) {
+if (!android.text.TextUtils.isEmpty(com.exteragram.messenger.ExteraConfig.customFontPath)) {
+                java.io.File fontFile = new java.io.File(com.exteragram.messenger.ExteraConfig.customFontPath);
+                if (fontFile.exists()) {
+                    try {
+                        Typeface customTypeface = Typeface.createFromFile(fontFile);
+                        if (customTypeface != null) {
+                            return customTypeface;
+                        }
+                    } catch (Exception e) {
+                        FileLog.e(e);
+                    }
+                }
+            }
             if (!typefaceCache.containsKey(assetPath)) {
                 Typeface t = null;
                 try {
