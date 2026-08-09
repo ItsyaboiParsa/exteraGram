@@ -163,6 +163,7 @@ public class AppearancePreferencesActivity extends BasePreferencesActivity {
         forceBlurRow = newRow();
         forceSnowRow = newRow();
         useSystemFontsRow = newRow();
+        customFontRow = newRow();
         useSystemEmojiRow = newRow();
         newSwitchStyleRow = newRow();
         disableDividersRow = newRow();
@@ -190,7 +191,16 @@ public class AppearancePreferencesActivity extends BasePreferencesActivity {
 
     @Override
     protected void onItemClick(View view, int position, float x, float y) {
-        if (position == useSystemFontsRow) {
+        if (position == customFontRow) {
+            presentFragment(new org.telegram.ui.DocumentSelectActivity(true, false, null, (path) -> {
+                com.exteragram.messenger.ExteraConfig.customFontPath = path;
+                com.exteragram.messenger.ExteraConfig.saveConfig();
+                org.telegram.messenger.AndroidUtilities.clearTypefaceCache();
+                if (getParentActivity() != null) {
+                    getParentActivity().recreate();
+                }
+            }));
+        } else if (position == useSystemFontsRow) {
             ExteraConfig.editor.putBoolean("useSystemFonts", ExteraConfig.useSystemFonts ^= true).apply();
             ((TextCheckCell) view).setChecked(ExteraConfig.useSystemFonts);
             AndroidUtilities.clearTypefaceCache();
@@ -426,7 +436,10 @@ public class AppearancePreferencesActivity extends BasePreferencesActivity {
                 case 5:
                     TextCheckCell textCheckCell = (TextCheckCell) holder.itemView;
                     textCheckCell.setEnabled(true, null);
-                    if (position == useSystemFontsRow) {
+                    if (position == customFontRow) {
+                String fontName = android.text.TextUtils.isEmpty(com.exteragram.messenger.ExteraConfig.customFontPath) ? "Default" : new java.io.File(com.exteragram.messenger.ExteraConfig.customFontPath).getName();
+                textCell.setTextAndValue("Custom Font (.ttf/.otf)", fontName, true);
+            } else if (position == useSystemFontsRow) {
                         textCheckCell.setTextAndCheck(LocaleController.getString("UseSystemFonts", R.string.UseSystemFonts), ExteraConfig.useSystemFonts, true);
                     } else if (position == useSystemEmojiRow) {
                         textCheckCell.setTextAndCheck(LocaleController.getString("UseSystemEmoji", R.string.UseSystemEmoji), SharedConfig.useSystemEmoji, true);
