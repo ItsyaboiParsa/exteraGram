@@ -106,6 +106,7 @@ public class AppearancePreferencesActivity extends BasePreferencesActivity {
     private int forceBlurRow;
     private int forceSnowRow;
     private int useSystemFontsRow;
+    private int customFontRow;
     private int useSystemEmojiRow;
     private int newSwitchStyleRow;
     private int disableDividersRow;
