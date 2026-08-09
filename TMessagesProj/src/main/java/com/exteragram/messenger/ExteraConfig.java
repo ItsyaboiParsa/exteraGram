@@ -323,6 +323,11 @@ public class ExteraConfig {
         NotificationCenter.getInstance(UserConfig.selectedAccount).postNotificationName(NotificationCenter.mainUserInfoChanged);
     }
 
+        public static void setCustomFontPath(String path) {
+        customFontPath = path;
+        editor.putString("customFontPath", path).apply();
+    }
+
     public static void setChannelToSave(long id) {
         editor.putLong("channelToSave", channelToSave = id).apply();
     }
