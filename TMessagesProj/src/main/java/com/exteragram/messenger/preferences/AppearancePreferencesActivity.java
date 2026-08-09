@@ -193,8 +193,7 @@ public class AppearancePreferencesActivity extends BasePreferencesActivity {
     protected void onItemClick(View view, int position, float x, float y) {
         if (position == customFontRow) {
             presentFragment(new org.telegram.ui.DocumentSelectActivity(true, false, null, (path) -> {
-                com.exteragram.messenger.ExteraConfig.customFontPath = path;
-                com.exteragram.messenger.ExteraConfig.saveConfig();
+                com.exteragram.messenger.ExteraConfig.setCustomFontPath(path);
                 org.telegram.messenger.AndroidUtilities.clearTypefaceCache();
                 if (getParentActivity() != null) {
                     getParentActivity().recreate();
