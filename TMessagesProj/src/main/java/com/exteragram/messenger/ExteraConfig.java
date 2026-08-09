@@ -52,6 +52,7 @@ public class ExteraConfig {
     public static boolean forceBlur;
     public static boolean forceSnow;
     public static boolean useSystemFonts;
+    public static String customFontPath = "";
     public static boolean newSwitchStyle;
     public static boolean disableDividers;
     public static boolean useLNavigation;
@@ -192,6 +193,7 @@ public class ExteraConfig {
             forceBlur = preferences.getBoolean("forceBlur", false);
             forceSnow = preferences.getBoolean("forceSnow", false);
             useSystemFonts = preferences.getBoolean("useSystemFonts", true);
+            customFontPath = preferences.getString("customFontPath", "");
             newSwitchStyle = preferences.getBoolean("newSwitchStyle", true);
             disableDividers = preferences.getBoolean("disableDividers", false);
             useLNavigation = preferences.getBoolean("useLNavigation", false);
